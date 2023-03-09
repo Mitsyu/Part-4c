@@ -15,6 +15,14 @@ namespace dice_roller_paart_4
             Console.WriteLine("Enter a maximum value: ");
             max = int.Parse(Console.ReadLine());
 
+            if (max < min)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Invaild. Max value cannot be smaller than min value");
+                Console.ResetColor();
+                return;
+            }
+
             Random rnd = new Random();
             Console.WriteLine("Five random values within that range: ");
 
@@ -50,24 +58,44 @@ namespace dice_roller_paart_4
 
 
             //random decimal numbers
-            double min1, max1, decimals;
+            
 
             Console.WriteLine("Enter a minimum value: ");
-            min1 = double.Parse(Console.ReadLine());
+            double min1 = double.Parse(Console.ReadLine());
+            Console.WriteLine();
 
             Console.WriteLine("Enter a maximum value: ");
-            max1 = double.Parse(Console.ReadLine());
+            double max1 = double.Parse(Console.ReadLine());
+            Console.WriteLine();
 
-            Console.WriteLine("Enter a number of decimal places you want: ");
-            decimals = double.Parse(Console.ReadLine());
+            if (max1 < min1)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Invaild. Max value cannot be smaller than min value");
+                Console.ResetColor();
+                return;
+            }
 
+            Console.WriteLine("Enter a number of decimal places you want (1-15): ");
+            int decimals = int.Parse(Console.ReadLine());
+
+            if (decimals < 1 || decimals > 15)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Invaild, choose from (1-15).");
+                Console.ResetColor();
+                return;
+            }
+
+            Console.WriteLine();
             Console.WriteLine("Three random values within that range: ");
+            
 
             for (int i = 0; i < 3; i++)
             {
-                Console.Write((rnd.NextDouble()* (max - min) + min).ToString("0.0") + "   ");
+                double randomValue = rnd.NextDouble() * (max1 - min1) + min1;
+                Console.Write(Math.Round(randomValue, decimals).ToString() + "  ");
 
-             
             }
 
         }
